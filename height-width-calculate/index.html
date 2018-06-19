@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<style>
+		body {
+			border: 1px solid red;
+			margin: 3;
+			padding: 5;
+		}
+
+		.parent {
+			position: relative;
+			border: 1px solid blue;
+			padding-top: 10px;
+			padding-left: 10px;
+			margin: 10px 0 0 10px;
+			min-height: 220px;
+			
+		}
+
+		#scroll-div {
+			position: absolute;
+			top:10px;
+			left: 10px;
+			width: 100px;
+			height: 150px;
+			overflow: scroll;
+			margin-top: 20px;
+			padding-top: 30px;
+			padding-left: 20px;
+			border: 1px solid yellowgreen;
+		}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="parent">
+		<div id="scroll-div">
+			以下图表代表同一页面的不同CSSOM属性。示例页面包含相对位于页面上的div红色元素。蓝色元素是红色元素的父项。它的主要目的是定义构成元素布局的不同级联样式表（CSS）框，以及显示如何计算offsetTop属性。视口是黑色轮廓，由html元素表示。在图中，html元素没有显示任何边距或边框。但是，添加边距或边框不会改变任何测量结果。
+		</div>
+	</div>
+	<button id="btn">click</button>
+</body>
+<script>
+	window.onload = function () {
+		var btn = document.getElementById('btn');
+		var div = document.getElementById('scroll-div');
+		var par = document.getElementsByClassName('parent')[0];
+		$(div).scrollTop(300);
+
+		btn.onclick = function () {
+			var height = window.getComputedStyle(div).height;
+			var clientHeight = div.clientHeight;
+			var scrollHeight = div.scrollHeight;
+			var offsetHeight = div.offsetHeight;
+			var scrollTop = div.scrollTop;
+			var offsetTop = div.offsetTop;
+			var offsetLeft = div.offsetLeft;
+
+			var boundingClientRect = div.getBoundingClientRect();
+			console.log(boundingClientRect);
+			var ele = document.createElement('p');
+			ele.style.paddingLeft = "150px";
+			ele.innerHTML = "height: " + height + "<br>"
+				+ "clientHeight: " + clientHeight + "<br>"
+				+ "scrollHeight: " + scrollHeight + "<br>"
+				+ "offsetHeight: " + offsetHeight + "<br>"
+				+ "scrollTop: " + scrollTop + "<br>"
+				+ "offsetTop: " + offsetTop + "<br>"
+				+ "offsetLeft: " + offsetLeft;
+			par.appendChild(ele);
+			//$(div).scrollTop(scrollHeight-clientHeight*2);
+		}
+
+	}
+</script>
+
+</html>
