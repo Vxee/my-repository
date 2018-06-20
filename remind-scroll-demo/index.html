@@ -2,146 +2,23 @@
 <html>
 
 <head>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
-    <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        #parent {
-            width: 800px;
-            height: 400px;
-            margin: 20px auto;
-            display: flex;
-            position: relative;
-        }
-
-        #chat-box {
-            flex: 1;
-            border: 1px solid #ddd;
-            overflow-y: scroll;
-        }
-
-        #alert-box {
-            position: absolute;
-            right: 20px;
-            top: 40px;
-            border: 1px solid #ccc;
-            height: 35px;
-            width: 150px;
-            text-align: center;
-            line-height: 35px;
-            cursor: pointer;
-            /* border-radius: 3px; */
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-        }
-
-        .message {
-            display: inline-block;
-            height: 25px;
-            line-height: 25px;
-            padding: 3px 10px;
-            margin: 20px;
-            background: #eee;
-            border-radius: 8px;
-        }
-    </style>
 
 </head>
 
 <body>
     <div id="parent">
         <div id="chat-box">
-
+            <div id="load" class="loading" style="display: none"><img style="width: 20px;height: 20px;" src="img/icon-spin-s.png"></div>
         </div>
         <div id="alert-box">
             有
             <span id="mess-count"></span>条提醒信息
         </div>
     </div>
-    <script>
-        let chatBox = document.getElementById('chat-box');
-        // 存放提醒消息的id
-        let remindList = [];
-        // 添加消息
-        for (let i = 0; i < 100; i++) {
-            let div = document.createElement('div');
-            let p = document.createElement('p');
-            if ((Math.random() - 0.8) > 0) {
-                p.innerHTML = '@消息';
-                p.style.color = 'red';
-                p.setAttribute("class", "message alert-mes");
-                p.setAttribute("id", "alert-mes" + i);
-                remindList.push("alert-mes" + i);
-            }
-            else {
-                p.innerHTML = 'test' + i;
-                p.setAttribute("class", "message");
-            }
-            div.appendChild(p);
-            chatBox.appendChild(div);
-        }
-        $(chatBox).scrollTop(chatBox.scrollHeight);
-
-        let textDiv = document.getElementById('mess-count');
-        textDiv.innerText = remindList.length;
-
-        // 为消息提示框添加点击事件
-        let alertBox = document.getElementById('alert-box');
-        alertBox.addEventListener('click', function () {
-            let item = remindList.shift();
-            let remindListEle = document.getElementById(item);
-            textDiv.innerText = remindList.length;
-
-            $(chatBox).scrollTop(remindListEle.offsetTop - 10);
-            if (remindList.length == 0) {
-                alertBox.style.display = 'none';
-            }
-        }, false);
-
-        // let scrollFunc = function(e){
-        //     e = e || window.event;
-        //     if(e.wheelDelta){ // ie/opera/chrome
-        //         console.log(e.wheelDelta);
-        //     }else if(e.detail){ // firefox
-        //         console.log(e.detail);
-        //     }
-        // }
-
-        // if(chatBox.addEventListener){
-        //     chatBox.addEventListener("DOMMouseScroll",scrollFunc,false);
-        // }
-        // chatBox.onmousewheel = scrollFunc // ie/opera/chrome
-
-        // 监听鼠标滚轮事件
-        $(chatBox).on('mousewheel', function (event) {
-            
-            let totalHeight = $(chatBox).scrollTop();
-            let boxHeight = chatBox.clientHeight;
-            console.log(totalHeight);
-            console.log(chatBox.scrollHeight);
-            let style = window.getComputedStyle(chatBox);
-            //console.log(chatBox.clientHeight);
-            let doms = document.querySelectorAll('.alert-mes');
-            for(let i in doms){
-                // 如果这条提醒在视线内 从提醒列表中移除
-                if(doms.hasOwnProperty(i) && doms[i].offsetTop && (doms[i].offsetTop <= (boxHeight + totalHeight) && (doms[i].offsetTop >= totalHeight))){
-                    let index = remindList.indexOf(doms[i].getAttribute('id'));
-                    index > -1 ? remindList.splice(index,1) : '';
-                    //doms[i].setAttribute('class','message');
-                }
-            }
-            textDiv.innerText = remindList.length;
-            if (remindList.length == 0) {
-                alertBox.style.display = 'none';
-            }
-        })
-
-
-    </script>
+    <script src="./js/script.js"></script>
 
 </body>
 
