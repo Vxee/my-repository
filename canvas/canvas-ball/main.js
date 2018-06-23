@@ -3,8 +3,8 @@ var canvas = document.getElementById("cas"),
     vpx = canvas.width/2,
     vpy = canvas.height/2,
     Radius = 50,                       //整体大球的坐标
-    LayerBallNum = 360 / 15,        // 横向
-    LayerIntervalUp = 360 / 15;     //
+    LayerBallNum = 360 / 20,        // 横向
+    LayerIntervalUp = 360 / 20;     //
     balls = [],
     angleX = Math.PI/100,
     angleY = Math.PI/100;
@@ -81,7 +81,7 @@ var canvas = document.getElementById("cas"),
         setBalls: function (radius) {
             for(var i=0; i<LayerBallNum; i++){
                 var angle =  2 * Math.PI / LayerBallNum * i;
-                var b = new ball(radius * Math.cos(angle), radius * Math.sin(angle), this.up * Math.sqrt(Math.pow(Radius, 2) - Math.pow(radius, 2)), 1.5);
+                var b = new ball(radius * Math.cos(angle), radius * Math.sin(angle), this.up * Math.sqrt(Math.pow(Radius, 2) - Math.pow(radius, 2)), 1);
                 b.paint();
                 balls.push(b);
             }
@@ -112,7 +112,7 @@ var canvas = document.getElementById("cas"),
             var scale = fl / (fl - this.z);
             var alpha = (this.z+Radius)/(2*Radius);
             ctx.arc(vpx + this.x, vpy + this.y, this.r*scale , 0 , 2*Math.PI , true);
-            ctx.fillStyle = "rgba(255,255,255,"+(alpha+0.5)+")";
+            ctx.fillStyle = "rgba(255,255,255,"+(alpha+0.6)+")";
             ctx.fill();
             ctx.restore();
         }
