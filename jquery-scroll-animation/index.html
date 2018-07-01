@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>移动端滚动动画</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .roll ul {
+            list-style: none;
+            /* animation: ani 5s linear infinite; */
+        }
+        /* @keyframes ani{
+            0% {
+                margin-top: 0;
+            }
+            12.5% {
+                margin-top: 0;
+            }
+            25% {
+                margin-top: -40px;
+            }
+            37.5% {
+                margin-top: -40px;
+            }
+            50% {
+                margin-top: -80px;
+            }
+            62.5% {
+                margin-top: -80px;
+            }
+            75% {
+                margin-top: -120px;
+            }
+            87.5% {
+                margin-top: -120px;
+            }
+            100% {
+                margin-top: -160px;
+            }
+        } */
+
+        .roll {
+            margin: 100px auto;
+            width: 200px;
+            height: 40px;
+            overflow: hidden;
+            border: 1px solid aquamarine;
+        }
+
+        .roll li {
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="roll" id="roll">
+        <ul>
+            <li>第一个结构</li>
+            <li>第二个结构</li>
+            <li>第三个结构</li>
+            <li>第四个结构</li>
+            <li>第五个结构</li>
+            <li>第六个结构</li>
+            <li>第七个结构</li>
+            <li>第八个结构</li>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            setInterval(function () { //添加定时器
+                $("#roll").find("ul:first").animate({
+                    marginTop: "-40px"
+                }, 500, function () {
+                    $(this).css({ marginTop: '0px' }).find("li:first").appendTo(this);
+                    $(this).find("li:first").appendTo(this);
+                })
+            }, 1500);
+        })
+    </script>
+</body>
+
+</html>
