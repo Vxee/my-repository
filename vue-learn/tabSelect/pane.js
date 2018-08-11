@@ -35,4 +35,7 @@ Vue.component('pane', {
     mounted() {
         this.updateNav();
     },
+    beforeDestroy() {
+        console.log('distory');
+    },
 })

@@ -15,7 +15,7 @@
 }
 .tabs-tab{
     display: inline-block;
-    padding: 4px 16px;
+    padding: 4px 20px;
     margin-right: 6px;
     background: #fff;
     border: 1px solid #d7dde4;
@@ -37,4 +37,17 @@
 }
 .tabs-content{
     padding: 8px 0;
+}
+.close-btn {
+    display: none;
+    
+}
+.close-btn-active {
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    transform: rotate(45deg);
+    cursor: default;
+    color: #000000;
 }

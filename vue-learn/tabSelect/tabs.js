@@ -7,6 +7,7 @@ Vue.component('tabs', {
                     v-for="(item, index) in navList" \
                     @click="handleChange(index)"> \
                     {{ item.label }} \
+                    <span :class="closeCls(item)" @click="handleClose(index)">+</span> \
                 </div> \
             </div> \
             <div class="tabs-content"> \
@@ -29,7 +30,15 @@ Vue.component('tabs', {
             return [
                 'tabs-tab',
                 {
-                    'tabs-tab-active': item.name === this.currentValue
+                    'tabs-tab-active': item.name === this.currentValue  
+                }
+            ]
+        },
+        closeCls: function(item){
+            return [
+                'close-btn',
+                {
+                    'close-btn-active': item.close === 'true' && item.name === this.currentValue  
                 }
             ]
         },
@@ -39,6 +48,10 @@ Vue.component('tabs', {
             this.currentValue = name;
             this.$emit('input', name);
             this.$emit('on-click', name);
+        },
+        handleClose: function(index){
+            this.navList.splice(index,1);
+            //this.updateNav();
         },
         getTabs(){
             return this.$children.filter(function(item){
@@ -51,7 +64,8 @@ Vue.component('tabs', {
             this.getTabs().forEach(function(pane, index){
                 _this.navList.push({
                     label: pane.label,
-                    name: pane.name || index
+                    name: pane.name || index,
+                    close: pane.close
                 });
                 if(!pane.name) pane.name = index;
                 if(index === 0) {
