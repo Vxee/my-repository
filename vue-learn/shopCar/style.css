@@ -1,0 +1,38 @@
+[v-cloak] {
+    display: none;
+}
+table{
+    border: 1px solid #cfcfcf;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+}
+th, td{
+    padding: 8px 16px;
+    border: 1px solid #cfcfcf;
+    text-align: left;
+}
+th{
+    background: #e8e8e8;
+    color: #5c6b77;
+    font-weight: 600;
+    white-space: nowrap;
+}
+td input {
+    height: 15px;
+    width: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    outline: none;
+    color: transparent;
+}
+td input:focus {
+    outline-offset: 0px;
+}
+.select {
+    background: #f6f6f6;
+}
+.select input{
+    background: rgb(252, 137, 29);
+}
