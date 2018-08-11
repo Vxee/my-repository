@@ -5,7 +5,8 @@ var app = new Vue({
     },
     methods: {
         handleClose: function(){
-            this.show = false
+            this.show = false;
+            console.log('1');
         }
     }
 })
