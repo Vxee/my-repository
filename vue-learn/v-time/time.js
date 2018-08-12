@@ -53,6 +53,22 @@ var Time = {
             tip = this.getLastDate(timestamp);
         }
         return tip;
+    },
+    // 已经出生了多少天
+    getBirthday(timestamp){
+        var now = this.getUnix();
+        var timer = (now - timestamp) /1000;
+        return '已经出生了' + Math.ceil(timer / 86400) + '天';
+    },
+    // 出生日期转化为年龄 按一年365天一月31天计算
+    getBirthToAge(timestamp){
+        var now = this.getUnix();
+        var timer = (now -timestamp) / 1000;
+        day = Math.ceil(timer / 86400);
+        year = Math.floor( day / 365); 
+        month = Math.floor((day - year * 365) / 31);
+        date = day - year * 365 - month * 31;
+        return year + '岁' + month + '月' + date + '天';
     }
 }
 Vue.directive('time', {
@@ -65,5 +81,29 @@ Vue.directive('time', {
     unbind: function(el){
         clearInterval(el.__timeout__);
         delete el.__timeout__;
+    }
+})
+Vue.directive('birthday', {
+    bind: function(el, binding){
+        el.innerHTML = Time.getBirthday(binding.value);
+        el.__birthfromnow__ = setInterval(function(){
+            el.innerHTML = Time.getBirthday(binding.value);
+        },6000);
+    },
+    unbind:function(el){
+        clearInterval(el.__birthfromnow__);
+        delete el.__birthfromnow__;
+    }
+})
+Vue.directive('birthtoage', {
+    bind: function(el, binding){
+        el.innerHTML = Time.getBirthToAge(binding.value);
+        el.__birthtoage__ = setInterval(function(){
+            el.innerHTML = Time.getBirthToAge(binding.value);
+        },6000);
+    },
+    unbind:function(el){
+        clearInterval(el.__birthtoage__);
+        delete el.__birthtoage__;
     }
 })
