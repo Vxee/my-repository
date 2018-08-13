@@ -22,3 +22,9 @@ var config = {
     ]
 }
 ```
+
+## update
+对生产环境下的js和css文件做了压缩合并
+```
+npm run build
+```
